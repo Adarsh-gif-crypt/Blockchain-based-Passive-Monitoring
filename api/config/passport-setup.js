@@ -54,7 +54,7 @@ passport.use(
             .then((newUser) => {
               console.log("New user cerated: ", newUser);
               done(null, newUser);
-            });
+            }); 
         }
       });
     }

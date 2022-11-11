@@ -42,17 +42,21 @@ app.use(morgan("dev"));
 app.use(cors());
 
 app.use("/auth", authRoutes);
-app.get("/", (req, res, next) => {
+app.get("/", authCheck, (req, res, next) => {
   res.render("faucet");
 });
 
-app.get("/details", (req, res, next) => {
+app.get("/details", authCheck, (req, res, next) => {
   res.render("details");
 });
 
-app.post("/filters", (req, res, next) => {
+app.post("/filters", authCheck, (req, res, next) => {
   console.log(req.body);
   res.render("filters");
+});
+
+app.use((req, res, next) => {
+  res.render("404");
 });
 
 module.exports = app;
