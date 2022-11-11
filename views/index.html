@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            RELY Signup form
+        </title>
+        <link rel="stylesheet" href="../public/css/style.css">
+    </head>
+    <body>
+        <div class="outcast">
+            <div class="goback">
+                <button type="button" class="gobackbtn">Go back</button>
+            </div>
+            <div class="form">
+               <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="join()">Join</button>
+                <button type="button" class="toggle-btn" onclick="update()">Update</button>
+               </div>
+            <form id="enter" class="input-grp">
+                <input type="text" class="input-field" placeholder="Enter Patient ID" required>
+                <input type="text" class="input-field" placeholder="Enter Email ID" required>
+                <input type="checkbox" class="chech-box"><span>Agree to <a href="">Terms and Conditions</a></span>
+                <button type="submit" class="submit-btn">Join</button>
+            </form>
+            <form id="update" class="input-grp">
+                <input type="text" class="input-field" placeholder="Enter Patient ID" required>
+                <input type="text" class="input-field" placeholder="Enter provided Hash" required>
+                <input type="checkbox" class="chech-box"><span>Agree to <a href="">Terms and Conditions</a></span>
+                <button type="submit" class="submit-btn">Update</button>
+            </form> 
+            </div>
+        </div>
+
+        <script>
+            var x = document.getElementById("enter");
+            var y = document.getElementById("update");
+            var z = document.getElementById("btn");
+
+            function update(){
+                x.style.left = "-400px";
+                y.style.left = "50px";
+                z.style.left = "110px";
+            }
+            function join(){
+                x.style.left = "50px";
+                y.style.left = "450px";
+                z.style.left = "0px";
+            }
+        </script>
+
+
+
+    </body>
+</html>
