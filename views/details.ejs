@@ -21,14 +21,16 @@
             Update
           </button>
         </div>
-        <form action="/filters" method="post" id="enter" class="input-grp">
+        <form action="/details" method="post" id="enter" class="input-grp">
           <input
+            name="patientID"
             type="text"
             class="input-field"
             placeholder="Enter Patient ID"
             required
           />
           <input
+            name="emailID"
             type="text"
             class="input-field"
             placeholder="Enter Email ID"
@@ -39,7 +41,7 @@
           >
           <button type="submit" class="submit-btn">Join</button>
         </form>
-        <form id="update" class="input-grp">
+        <form id="update" action="/details" method="post" class="input-grp">
           <input
             name="patientID"
             type="text"

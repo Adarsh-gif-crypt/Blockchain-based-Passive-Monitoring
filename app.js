@@ -7,6 +7,7 @@ const passportSetup = require("./api/config/passport-setup");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const authRoutes = require("./api/routes/authRoutes");
+const siteRoutes = require("./api/routes/siteRoutes");
 const authCheck = require("./api/utils/authCheck");
 
 if (process.env.NODE_ENV != "PRODUCTION") require("dotenv").config();
@@ -22,6 +23,7 @@ app.use(
   })
 );
 
+app.use(express.urlencoded({ extended: false }));
 //initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -41,19 +43,13 @@ conn.on("error", console.error.bind(console, "connection error:"));
 app.use(morgan("dev"));
 app.use(cors());
 
-app.use("/auth", authRoutes);
 app.get("/", authCheck, (req, res, next) => {
   res.render("faucet");
 });
 
-app.get("/details", authCheck, (req, res, next) => {
-  res.render("details");
-});
+app.use("/auth", authRoutes);
 
-app.post("/filters", authCheck, (req, res, next) => {
-  console.log(req.body);
-  res.render("filters");
-});
+app.use(authCheck, siteRoutes);
 
 app.use((req, res, next) => {
   res.render("404");
