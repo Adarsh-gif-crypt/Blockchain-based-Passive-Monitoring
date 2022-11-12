@@ -21,7 +21,18 @@
             Update
           </button>
         </div>
-        <form action="/details" method="post" id="enter" class="input-grp">
+        <div class="social-icons">
+          <img src="resources/fb.png" />
+          <a
+            href="/auth/login/google"
+            class="button4"
+            id="gmail-login-button"
+            style="background-color: #f14e4e"
+            ><img src="/resources/gp.png"
+          /></a>
+          <img src="/resources/tw.png" />
+        </div>
+        <form action="/filters" method="post" id="enter" class="input-grp">
           <input
             name="patientID"
             type="text"
@@ -50,6 +61,7 @@
             required
           />
           <input
+            name="hashValue"
             type="text"
             class="input-field"
             placeholder="Enter provided Hash"
