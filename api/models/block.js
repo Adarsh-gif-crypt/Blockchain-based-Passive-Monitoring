@@ -1,9 +1,9 @@
 const ethAirBalloons = require("ethairballoons");
 const path = require("path");
-let savePath = path.resolve(__dirname + "/contracts");
+let savePath = path.resolve(__dirname + "../../../contracts");
 
 const ethAirBalloonsProvider = ethAirBalloons(
-  "https://tiniest-old-orb.ethereum-goerli.discover.quiknode.pro/1d39f733ead0d3af6bef7949987a38e8539798ae/",
+  "http://127.0.0.1:8545",
   savePath
 );
 
@@ -15,6 +15,18 @@ const Block = ethAirBalloonsProvider.createSchema({
       name: "patientID",
       type: "bytes32",
       primaryKey: true,
+    },
+    {
+      name: "kinEmail",
+      type: "bytes32",
+    },
+    {
+      name: "medicalEmail",
+      type: "bytes32",
+    },
+    {
+      name: "otherEmail",
+      type: "bytes32",
     },
     {
       name: "heartRate",
@@ -62,18 +74,6 @@ const Block = ethAirBalloonsProvider.createSchema({
     },
     {
       name: "oximeter",
-      type: "bytes32",
-    },
-    {
-      name: "kinEmail",
-      type: "bytes32",
-    },
-    {
-      name: "medicalEmail",
-      type: "bytes32",
-    },
-    {
-      name: "otherEmail",
       type: "bytes32",
     },
   ],

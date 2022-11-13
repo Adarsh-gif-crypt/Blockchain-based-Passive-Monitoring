@@ -11,7 +11,7 @@ const Block = require("../models/block");
 let savePath = path.resolve(__dirname + "/contracts");
 
 const ethAirBalloonsProvider = ethAirBalloons(
-  "https://tiniest-old-orb.ethereum-goerli.discover.quiknode.pro/1d39f733ead0d3af6bef7949987a38e8539798ae/",
+  "http://127.0.0.1:8545",
   savePath
 );
 
@@ -69,32 +69,42 @@ passport.use(
           //new block creation
           console.log("Now creating a new block");
 
-          const newBlock = {
-            patientID: profile.id,
-            kinEmail: "",
-            medicalEmail: "",
-            otherEmail: "",
-            heartRate: "off",
-            bloodPressure: "off",
-            temperature: "off",
-            oxygenLevel: "off",
-            glucoseLevel: "off",
-            hydrationLevel: "off",
-            tvActivity: "off",
-            phoneActivity: "off",
-            watchActivity: "off",
-            sleepActivity: "off",
-            lightingActivity: "off",
-            oximeter: "off",
-          };
+          // await Block.deploy(function (err, success) {
+          //   if (err) {
+          //     console.log("Error in BLOCK.JS: ", err);
+          //   } else {
+          //     console.log("Deployed successfully");
+          //   }
+          // });
 
-          await Block.save(newBlock, function (err, objectSaved) {
-            if (!err) {
-              console.log("Block saved!");
-            } else {
-              console.log(err);
-            }
-          });
+          setTimeout(function () {
+            const newBlock = {
+              patientID: "123",
+              kinEmail: "q",
+              medicalEmail: "d",
+              otherEmail: "s",
+              heartRate: "off",
+              bloodPressure: "off",
+              temperature: "off",
+              oxygenLevel: "off",
+              glucoseLevel: "off",
+              hydrationLevel: "off",
+              tvActivity: "off",
+              phoneActivity: "off",
+              watchActivity: "off",
+              sleepActivity: "off",
+              lightingActivity: "off",
+              oximeter: "off",
+            };
+
+            Block.save(newBlock, function (err, objectSaved) {
+              if (!err) {
+                console.log("Block saved!");
+              } else {
+                console.log(err);
+              }
+            });
+          }, 5000);
           done(null, myNewUser);
         }
       });
