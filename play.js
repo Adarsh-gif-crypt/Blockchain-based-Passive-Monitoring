@@ -18,6 +18,18 @@ const Block = ethAirBalloonsProvider.createSchema({
       primaryKey: true,
     },
     {
+      name: "kinEmail",
+      type: "bytes32",
+    },
+    {
+      name: "medicalEmail",
+      type: "bytes32",
+    },
+    {
+      name: "otherEmail",
+      type: "bytes32",
+    },
+    {
       name: "heartRate",
       type: "bytes32",
     },
@@ -65,18 +77,6 @@ const Block = ethAirBalloonsProvider.createSchema({
       name: "oximeter",
       type: "bytes32",
     },
-    {
-      name: "kinEmail",
-      type: "bytes32",
-    },
-    {
-      name: "medicalEmail",
-      type: "bytes32",
-    },
-    {
-      name: "otherEmail",
-      type: "bytes32",
-    },
   ],
 });
 
@@ -93,9 +93,9 @@ setTimeout(function () {
   //your code to be executed after 1 second
   const newBlock = {
     patientID: "123",
-    kinEmail: "",
-    medicalEmail: "",
-    otherEmail: "",
+    kinEmail: "q",
+    medicalEmail: "d",
+    otherEmail: "s",
     heartRate: "off",
     bloodPressure: "off",
     temperature: "off",
