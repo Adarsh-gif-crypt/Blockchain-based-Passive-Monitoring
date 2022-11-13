@@ -2,8 +2,9 @@ const ethAirBalloons = require("ethairballoons");
 const path = require("path");
 let savePath = path.resolve(__dirname + "/contracts");
 
+console.log("dirname: ", __dirname);
 const ethAirBalloonsProvider = ethAirBalloons(
-  "https://tiniest-old-orb.ethereum-goerli.discover.quiknode.pro/1d39f733ead0d3af6bef7949987a38e8539798ae/",
+  "http://127.0.0.1t:8545",
   savePath
 );
 
@@ -69,7 +70,7 @@ const Block = ethAirBalloonsProvider.createSchema({
       type: "string",
     },
     {
-      name: "otherEmail",
+      name: "medicalEmail",
       type: "string",
     },
     {
@@ -79,12 +80,12 @@ const Block = ethAirBalloonsProvider.createSchema({
   ],
 });
 
-exports.postDetails = (req, res, next) => {
-  console.log(req.body);
-  res.render("filters");
-};
-exports.postFilters = (req, res, next) => {
-  //create new block
-  console.log(req.body);
-  res.render("success");
-};
+Block.deploy(function (err, success) {
+  if (!err) {
+    console.log("Deployed successfully");
+  } else {
+    console.log("COULD NOT DEPLOY");
+    console.log(err);
+  }
+});
+module.exports = Block;

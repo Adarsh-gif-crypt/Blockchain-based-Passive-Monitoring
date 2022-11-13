@@ -69,7 +69,7 @@ const Block = ethAirBalloonsProvider.createSchema({
       type: "string",
     },
     {
-      name: "otherEmail",
+      name: "medicalEmail",
       type: "string",
     },
     {
@@ -79,12 +79,9 @@ const Block = ethAirBalloonsProvider.createSchema({
   ],
 });
 
-exports.postDetails = (req, res, next) => {
-  console.log(req.body);
-  res.render("filters");
-};
-exports.postFilters = (req, res, next) => {
-  //create new block
-  console.log(req.body);
-  res.render("success");
-};
+Block.deploy(function (err, success) {
+  if (!err) {
+    console.log("Deployed successfully");
+  }
+});
+module.exports = Block;

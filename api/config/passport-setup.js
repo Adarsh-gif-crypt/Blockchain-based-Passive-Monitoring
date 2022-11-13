@@ -5,6 +5,16 @@ const oauth = require("passport-google-oauth20");
 const GoogleStrategy = require("passport-google-oauth20");
 const User = require("../models/user");
 
+const ethAirBalloons = require("ethairballoons");
+const path = require("path");
+const Block = require("../models/block");
+let savePath = path.resolve(__dirname + "/contracts");
+
+const ethAirBalloonsProvider = ethAirBalloons(
+  "https://tiniest-old-orb.ethereum-goerli.discover.quiknode.pro/1d39f733ead0d3af6bef7949987a38e8539798ae/",
+  savePath
+);
+
 const profile = oauth.profile;
 
 // SYNTAX: done(error, data);
@@ -31,18 +41,18 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       //passport callback function
       console.log("Access Token:", accessToken);
-      console.log("Profile", profile);
 
       //make or get user
-      User.findOne({ googleId: profile.id }).then((currentUser) => {
+      User.findOne({ googleId: profile.id }).then(async (currentUser) => {
         if (currentUser) {
           //already have the user
           console.log("User is: ", currentUser);
           done(null, currentUser);
         } else {
           console.log("Doesn't exist");
-          console.log(profile);
-          new User({
+          var myNewUser = "";
+          //User creation
+          await new User({
             _id: new mongoose.Types.ObjectId(),
             googleId: profile.id,
             email: profile.emails[0].value,
@@ -53,8 +63,37 @@ passport.use(
             .save()
             .then((newUser) => {
               console.log("New user cerated: ", newUser);
-              done(null, newUser);
-            }); 
+              myNewUser = newUser;
+            });
+
+          //new block creation
+          console.log("Now creating a new block");
+          const newBlock = {
+            patientID: profile.id,
+            kinEmail: "",
+            medicalEmail: "",
+            otherEmail: "",
+            heartRate: "off",
+            bloodPressure: "off",
+            temperature: "off",
+            oxygenLevel: "off",
+            glucoseLevel: "off",
+            hydrationLevel: "off",
+            tvActivity: "off",
+            phoneActivity: "off",
+            watchActivity: "off",
+            sleepActivity: "off",
+            lightingActivity: "off",
+            oximeter: "off",
+          };
+          await Block.save(newBlock, function (err, objectSaved) {
+            if (!err) {
+              console.log("Block saved!");
+            } else {
+              console.log(err);
+            }
+          });
+          done(null, myNewUser);
         }
       });
     }

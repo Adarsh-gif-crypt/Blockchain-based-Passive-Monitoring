@@ -43,10 +43,13 @@ conn.on("error", console.error.bind(console, "connection error:"));
 app.use(morgan("dev"));
 app.use(cors());
 
-app.get("/", authCheck, (req, res, next) => {
+app.get("/", (req, res, next) => {
   res.render("faucet");
 });
 
+app.get("/details", (req, res, next) => {
+  res.render("details");
+});
 app.use("/auth", authRoutes);
 
 app.use(authCheck, siteRoutes);
