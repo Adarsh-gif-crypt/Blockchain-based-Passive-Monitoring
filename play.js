@@ -4,7 +4,7 @@ let savePath = path.resolve(__dirname + "/contracts");
 
 console.log("dirname: ", __dirname);
 const ethAirBalloonsProvider = ethAirBalloons(
-  "http://127.0.0.1t:8545",
+  "http://127.0.0.1:8545",
   savePath
 );
 
@@ -14,68 +14,68 @@ const Block = ethAirBalloonsProvider.createSchema({
   properties: [
     {
       name: "patientID",
-      type: "string",
+      type: "bytes32",
       primaryKey: true,
     },
     {
       name: "heartRate",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "bloodPressure",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "temperature",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "oxygenLevel",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "glucoseLevel",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "hydrationLevel",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "tvActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "phoneActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "watchActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "sleepActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "lightingActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "oximeter",
-      type: "string",
+      type: "bytes32",
     },
     {
-      name: "kinEmamil",
-      type: "string",
+      name: "kinEmail",
+      type: "bytes32",
     },
     {
       name: "medicalEmail",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "otherEmail",
-      type: "string",
+      type: "bytes32",
     },
   ],
 });
@@ -88,4 +88,35 @@ Block.deploy(function (err, success) {
     console.log(err);
   }
 });
+
+setTimeout(function () {
+  //your code to be executed after 1 second
+  const newBlock = {
+    patientID: "123",
+    kinEmail: "",
+    medicalEmail: "",
+    otherEmail: "",
+    heartRate: "off",
+    bloodPressure: "off",
+    temperature: "off",
+    oxygenLevel: "off",
+    glucoseLevel: "off",
+    hydrationLevel: "off",
+    tvActivity: "off",
+    phoneActivity: "off",
+    watchActivity: "off",
+    sleepActivity: "off",
+    lightingActivity: "off",
+    oximeter: "off",
+  };
+
+  Block.save(newBlock, function (err, objectSaved) {
+    if (!err) {
+      console.log("Block saved!");
+    } else {
+      console.log(err);
+    }
+  });
+}, 5000);
+
 module.exports = Block;

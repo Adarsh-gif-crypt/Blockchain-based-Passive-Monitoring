@@ -13,74 +13,76 @@ const Block = ethAirBalloonsProvider.createSchema({
   properties: [
     {
       name: "patientID",
-      type: "string",
+      type: "bytes32",
       primaryKey: true,
     },
     {
       name: "heartRate",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "bloodPressure",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "temperature",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "oxygenLevel",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "glucoseLevel",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "hydrationLevel",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "tvActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "phoneActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "watchActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "sleepActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "lightingActivity",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "oximeter",
-      type: "string",
+      type: "bytes32",
     },
     {
-      name: "kinEmamil",
-      type: "string",
+      name: "kinEmail",
+      type: "bytes32",
     },
     {
       name: "medicalEmail",
-      type: "string",
+      type: "bytes32",
     },
     {
       name: "otherEmail",
-      type: "string",
+      type: "bytes32",
     },
   ],
 });
 
 Block.deploy(function (err, success) {
-  if (!err) {
+  if (err) {
+    console.log("Error in BLOCK.JS: ", err);
+  } else {
     console.log("Deployed successfully");
   }
 });

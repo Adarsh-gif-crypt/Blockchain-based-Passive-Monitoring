@@ -5,9 +5,9 @@ pragma solidity >=0.6.2;
 pragma experimental ABIEncoderV2;
 
 contract HealthContract {
-	string public dataId;
+	bytes32 public dataId;
 	uint public numberOfRecords = 0;
-	string[] public recordsList;
+	bytes32[] public recordsList;
 
 	event dataAdded(string dat);
 
@@ -16,9 +16,9 @@ contract HealthContract {
 		uint listPointer;
 	}
 
-	mapping(string => Block) public facts;
+	mapping(bytes32 => Block) public facts;
 
-	function isRecord(string recordAddress) internal view returns (bool isRec) {
+	function isRecord(bytes32 recordAddress) internal view returns (bool isRec) {
 		if(recordsList.length == 0) return false;
 		return (recordsList[facts[recordAddress].listPointer] == recordAddress);
 	}
@@ -27,7 +27,7 @@ contract HealthContract {
 		return recordsList.length;
 	}
 
-	function addRecord(string memory payload, string ID) external returns (bool success) {
+	function addRecord(string memory payload, bytes32 ID) external returns (bool success) {
 		if(isRecord(ID)) revert('record with this id already exists');
 		facts[ID].payload = payload;
 		recordsList.push(ID);
@@ -36,12 +36,12 @@ contract HealthContract {
 		return (true);
 	}
 
-	function getRecord(string id) external view returns (string memory payload){
+	function getRecord(bytes32 id) external view returns (string memory payload){
 		if(!isRecord(id)) revert('record with this id does not exist');
 		return (facts[id].payload);
 	}
 
-	function updateRecord(string id, string memory payload) external returns (bool success){
+	function updateRecord(bytes32 id, string memory payload) external returns (bool success){
 		if(!isRecord(id)) revert('record with this id does not exist');
 		facts[id].payload = payload;
 		return (true);
@@ -56,10 +56,10 @@ contract HealthContract {
 		return (payloadss);
 	}
 
-	function deleteRecord(string id) external returns (bool success) {
+	function deleteRecord(bytes32 id) external returns (bool success) {
 		if(!isRecord(id)) revert('record with this id does not exist');
 		uint rowToDelete = facts[id].listPointer;
-		string keyToMove = recordsList[recordsList.length-1];
+		bytes32 keyToMove = recordsList[recordsList.length-1];
 		recordsList[rowToDelete] = keyToMove;
 		facts[keyToMove].listPointer = rowToDelete;
 		recordsList.pop();

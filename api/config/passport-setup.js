@@ -68,6 +68,7 @@ passport.use(
 
           //new block creation
           console.log("Now creating a new block");
+
           const newBlock = {
             patientID: profile.id,
             kinEmail: "",
@@ -86,6 +87,7 @@ passport.use(
             lightingActivity: "off",
             oximeter: "off",
           };
+
           await Block.save(newBlock, function (err, objectSaved) {
             if (!err) {
               console.log("Block saved!");
