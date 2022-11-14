@@ -1,6 +1,6 @@
 const ethAirBalloons = require("ethairballoons");
 const Block = require("../models/block");
-
+const nodemailer = require("nodemailer");
 const path = require("path");
 
 exports.postDetails = (req, res, next) => {
@@ -40,5 +40,29 @@ exports.postFilters = (req, res, next) => {
       } else res.send(err);
     }
   );
+  //Sending email.....
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "bountyhunter0005@gmail.com",
+      pass: "BugsBunny0005",
+    },
+  });
+
+  var mailOptions = {
+    from: "bountyhunter0005@gmail.com",
+    to: `${req.body.kinEmail}, ${req.body.medicalEmail}, ${req.body.otherEmail}`,
+    subject: `Access key for patient: ${req.user.displayName}`,
+    text: `Your Unique access code is: ${req.user.uniqueCode}`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log("Couldn't send email: ", error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+
   console.log(req.body);
 };

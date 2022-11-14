@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const authRoutes = require("./api/routes/authRoutes");
 const siteRoutes = require("./api/routes/siteRoutes");
+const displayRoutes = require("./api/routes/displayRoutes");
 const authCheck = require("./api/utils/authCheck");
 const Block = require("./api/models/block");
 
@@ -47,36 +48,12 @@ app.use(cors());
 app.get("/", (req, res, next) => {
   res.render("faucet");
 });
+app.use(displayRoutes);
 
 app.get("/details", (req, res, next) => {
   res.render("details");
 });
 app.use("/auth", authRoutes);
-
-app.get("/display", (req, res, next) => {});
-
-app.post("/display", (req, res, next) => {
-  const uniqueCode = req.query.code;
-  console.log(uniqueCode);
-  Block.findById(uniqueCode, function (err, record) {
-    if (!err) {
-      console.log(record);
-      res.send(record);
-    } else {
-      console.log("No record found");
-      res.send("Not found");
-    }
-  });
-});
-
-app.get("/all", (req, res, next) => {
-  Block.find(function (err, allRecords) {
-    if (!err) {
-      console.log();
-      res.send(allRecords);
-    }
-  });
-});
 
 app.use(authCheck, siteRoutes);
 
