@@ -31,7 +31,7 @@ router.post("/display", async (req, res, next) => {
     if (!err) {
       console.log("Found: ", JSON.stringify(record));
       fs.writeFileSync(p, JSON.stringify(record));
-      spawn("python", ["nakedf.py"]);
+      spawn("python", ["./makedf.py"]);
       res.render("displaydata", { download: true, msg: "link here" });
     } else {
       console.log("No record found");
