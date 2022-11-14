@@ -57,6 +57,7 @@ app.get("/display", (req, res, next) => {});
 
 app.post("/display", (req, res, next) => {
   const uniqueCode = req.query.code;
+  console.log(uniqueCode);
   Block.findById(uniqueCode, function (err, record) {
     if (!err) {
       console.log(record);
@@ -68,8 +69,13 @@ app.post("/display", (req, res, next) => {
   });
 });
 
-app.post("/display", (req, res, next) => {
-  const uniqueCode = req.query.code;
+app.get("/all", (req, res, next) => {
+  Block.find(function (err, allRecords) {
+    if (!err) {
+      console.log();
+      res.send(allRecords);
+    }
+  });
 });
 
 app.use(authCheck, siteRoutes);

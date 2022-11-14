@@ -51,6 +51,7 @@ passport.use(
         } else {
           console.log("Doesn't exist");
           var myNewUser = "";
+          const uniqueCode = Math.floor(100000 + Math.random() * 900000);
           //User creation
           await new User({
             _id: new mongoose.Types.ObjectId(),
@@ -59,6 +60,7 @@ passport.use(
             displayName: profile.displayName,
             profilePicture: profile.photos[0].value,
             uploads: [],
+            uniqueCode: uniqueCode.toString(),
           })
             .save()
             .then((newUser) => {
@@ -66,7 +68,6 @@ passport.use(
               myNewUser = newUser;
             });
           //Unique code:
-          const uniqueCode = Math.floor(100000 + Math.random() * 900000);
           //new block creation
           console.log("Now creating a new block");
 
@@ -80,7 +81,7 @@ passport.use(
 
           setTimeout(function () {
             const newBlock = {
-              uniqueCode: uniqueCode,
+              uniqueCode: uniqueCode.toString(),
               patientID: profile.id,
               kinEmail: "",
               medicalEmail: "",
