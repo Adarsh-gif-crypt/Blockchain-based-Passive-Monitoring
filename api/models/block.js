@@ -12,9 +12,13 @@ const Block = ethAirBalloonsProvider.createSchema({
   contractName: "HealthContract",
   properties: [
     {
-      name: "patientID",
+      name: "uniqueCode",
       type: "bytes32",
       primaryKey: true,
+    },
+    {
+      name: "patientID",
+      type: "bytes32",
     },
     {
       name: "kinEmail",

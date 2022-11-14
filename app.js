@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const authRoutes = require("./api/routes/authRoutes");
 const siteRoutes = require("./api/routes/siteRoutes");
 const authCheck = require("./api/utils/authCheck");
+const Block = require("./api/models/block");
 
 if (process.env.NODE_ENV != "PRODUCTION") require("dotenv").config();
 
@@ -51,6 +52,25 @@ app.get("/details", (req, res, next) => {
   res.render("details");
 });
 app.use("/auth", authRoutes);
+
+app.get("/display", (req, res, next) => {});
+
+app.post("/display", (req, res, next) => {
+  const uniqueCode = req.query.code;
+  Block.findById(uniqueCode, function (err, record) {
+    if (!err) {
+      console.log(record);
+      res.send(record);
+    } else {
+      console.log("No record found");
+      res.send("Not found");
+    }
+  });
+});
+
+app.post("/display", (req, res, next) => {
+  const uniqueCode = req.query.code;
+});
 
 app.use(authCheck, siteRoutes);
 

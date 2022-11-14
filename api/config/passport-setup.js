@@ -65,7 +65,8 @@ passport.use(
               console.log("New user cerated: ", newUser);
               myNewUser = newUser;
             });
-
+          //Unique code:
+          const uniqueCode = Math.floor(100000 + Math.random() * 900000);
           //new block creation
           console.log("Now creating a new block");
 
@@ -79,10 +80,11 @@ passport.use(
 
           setTimeout(function () {
             const newBlock = {
-              patientID: "123",
-              kinEmail: "q",
-              medicalEmail: "d",
-              otherEmail: "s",
+              uniqueCode: uniqueCode,
+              patientID: profile.id,
+              kinEmail: "",
+              medicalEmail: "",
+              otherEmail: "",
               heartRate: "off",
               bloodPressure: "off",
               temperature: "off",
