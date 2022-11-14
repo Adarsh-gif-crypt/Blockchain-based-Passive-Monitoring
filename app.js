@@ -8,7 +8,9 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const authRoutes = require("./api/routes/authRoutes");
 const siteRoutes = require("./api/routes/siteRoutes");
+const displayRoutes = require("./api/routes/displayRoutes");
 const authCheck = require("./api/utils/authCheck");
+const Block = require("./api/models/block");
 
 if (process.env.NODE_ENV != "PRODUCTION") require("dotenv").config();
 
@@ -43,10 +45,14 @@ conn.on("error", console.error.bind(console, "connection error:"));
 app.use(morgan("dev"));
 app.use(cors());
 
-app.get("/", authCheck, (req, res, next) => {
+app.get("/", (req, res, next) => {
   res.render("faucet");
 });
+app.use(displayRoutes);
 
+app.get("/details", (req, res, next) => {
+  res.render("details");
+});
 app.use("/auth", authRoutes);
 
 app.use(authCheck, siteRoutes);

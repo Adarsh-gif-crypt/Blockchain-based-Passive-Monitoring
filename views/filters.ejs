@@ -17,72 +17,72 @@
           We collect a variety of Data from our users. Please select the data
           you want us to collect. Your choices are completely anonymous.
         </h3>
+        <form action="/filters" method="post" class="pinfo">
         <div class="filters">
-          <form class="data">
-            <div style="float: left" id="hr" class="cb">
-              <input type="checkbox" /><label for="hr">Heart Rate</label>
+          <div style="float: left" id="hr" class="cb">
+              <input name="heartRate" type="checkbox" /><label for="hr">Heart Rate</label>
             </div>
             <div style="float: left" id="bp" class="cb">
-              <input type="checkbox" /><label for="bp">Blood Pressure</label>
+              <input name="bloodPressure" type="checkbox" /><label for="bp">Blood Pressure</label>
             </div>
             <div style="float: left" id="ol" class="cb">
-              <input type="checkbox" /><label for="ol">Oxygen Level</label>
+              <input name="oxygenLevel" type="checkbox" /><label for="ol">Oxygen Level</label>
             </div>
             <div style="float: left" id="tp" class="cb">
-              <input type="checkbox" /><label for="tp">Temperature</label>
+              <input name="temperature" type="checkbox" /><label for="tp">Temperature</label>
             </div>
             <div style="float: left" id="gl" class="cb">
-              <input type="checkbox" /><label for="gl">Glucose Level</label>
+              <input name="glucoseLevel" type="checkbox" /><label for="gl">Glucose Level</label>
             </div>
             <div style="float: left" id="hl" class="cb">
-              <input type="checkbox" /><label for="hl">Hydration Level</label>
+              <input name="hydrationLevel" type="checkbox" /><label for="hl">Hydration Level</label>
             </div>
             <div style="clear: both">&nbsp;</div>
             <div style="float: left" id="tva" class="cb">
-              <input type="checkbox" /><label for="tva">TV Activity</label>
+              <input name="tvActivity" type="checkbox" /><label for="tva">TV Activity</label>
             </div>
             <div style="float: left" id="sma" class="cb">
-              <input type="checkbox" /><label for="sma">Phone Activity</label>
+              <input name="phoneActivity" type="checkbox" /><label for="sma">Phone Activity</label>
             </div>
             <div style="float: left" id="wa" class="cb">
-              <input type="checkbox" /><label for="wa">Watch Activity</label>
+              <input name="watchActivity" type="checkbox" /><label for="wa">Watch Activity</label>
             </div>
             <div style="float: left" id="sa" class="cb">
-              <input type="checkbox" /><label for="sa">Sleep Activity</label>
+              <input name="sleepActivity" type="checkbox" /><label for="sa">Sleep Activity</label>
             </div>
             <div style="float: left" id="l" class="cb">
-              <input type="checkbox" /><label for="l">Lighting Activity</label>
+              <input name="lightingActivity" type="checkbox" /><label for="l">Lighting Activity</label>
             </div>
             <div style="float: left" id="po" class="cb">
-              <input type="checkbox" /><label for="po">Oximeter</label>
+              <input name="oximeter" type="checkbox" /><label for="po">Oximeter</label>
             </div>
-          </form>
         </div>
         <h3>
           Please enter the emails of the users you want this data to be shared
           with. All the participants will remain anonymous.
         </h3>
         <div class="emails">
-          <form class="pinfo">
+         
             <div style="float: left" id="nok" class="em">
-              <input type="email" required /><label for="nok"
+              <input name="kinEmail" type="email" required /><label for="nok"
                 >Next of Kin (Spouse/Children)</label
               >
             </div>
             <div style="float: left" id="mp" class="em">
-              <input type="email" required /><label for="mp"
+              <input name="medicalEmail" type="email" required /><label for="mp"
                 >Medical Professional</label
               >
             </div>
             <div style="float: left" id="ao" class="em">
-              <input type="email" required /><label for="ao">Any Other</label>
+              <input name="otherEmail" type="email" required /><label for="ao">Any Other</label>
+            </div>
+            <div class="fil-btn-box">
+              <button type="submit" class="fil-btn">Submit</button>
+              <button type="submit" class="fil-btn0">Display Data</button>
             </div>
           </form>
         </div>
-        <div class="fil-btn-box">
-          <button type="submit" class="fil-btn">Submit</button>
-          <button type="submit" class="fil-btn0">Display Data</button>
-        </div>
+      
       </div>
     </div>
   </body>

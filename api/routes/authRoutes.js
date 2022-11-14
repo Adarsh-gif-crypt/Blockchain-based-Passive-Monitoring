@@ -16,7 +16,7 @@ router.get(
   "/google/redirect",
   passport.authenticate("google"),
   (req, res, next) => {
-    res.redirect("/");
+    res.redirect("/filters");
   }
 );
 
