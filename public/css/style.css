@@ -239,3 +239,25 @@ label{
     outline: none;
     border-radius: 30px;
 }
+
+.download-btn{
+    margin: 0 auto;
+    position: absolute;
+    left: 550px;
+    top: 200px;
+
+}
+.d-btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0 auto;
+}
+  
+  /* Darker background on mouse-over */
+.d-btn:hover {
+    background-color: RoyalBlue;
+}
