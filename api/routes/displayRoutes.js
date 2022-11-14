@@ -27,15 +27,16 @@ router.get("/all", (req, res, next) => {
 router.post("/display", async (req, res, next) => {
   const uniqueCode = req.body.code;
   console.log(uniqueCode);
+  PythonShell.run("makedf.py", null, function (err) {
+    if (err) console.log("Error executing pythobn", err);
+    console.log("finished executing the python script");
+  });
 
   await Block.findById(uniqueCode, async function (err, record) {
     if (!err) {
       console.log("Found: ", JSON.stringify(record));
       fs.writeFileSync(p, JSON.stringify(record));
-      await PythonShell.run("makedf.py", null, function (err) {
-        if (err) console.log("Error executing pythobn", err);
-        console.log("finished executing the python script");
-      });
+
       res.render("displaydata", { download: true, msg: "link here" });
     } else {
       console.log("No record found");
