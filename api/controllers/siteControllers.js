@@ -44,8 +44,8 @@ exports.postFilters = async (req, res, next) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "as8969@srmist.edu.in",
-      pass: "Arash#123",
+      user: process.env.MAIL,
+      pass: process.env.MAILPASS,
     },
     tls: {
       rejectUnauthorized: false,
@@ -53,7 +53,7 @@ exports.postFilters = async (req, res, next) => {
   });
 
   var mailOptions = {
-    from: "as8969@srmist.edu.in",
+    from: process.env.MAIL,
     to: `${req.body.kinEmail}, ${req.body.medicalEmail}, ${req.body.otherEmail}`,
     subject: `Access key for patient: ${req.user.displayName}`,
     text: `Your Unique access code is: ${req.user.uniqueCode}`,
