@@ -2,11 +2,6 @@ const ethAirBalloons = require("ethairballoons");
 const Block = require("../models/block");
 const nodemailer = require("nodemailer");
 const path = require("path");
-const sgMail = require("@sendgrid/mail");
-
-sgMail.setApiKey(
-  "SG.wm4Y9ThiSJuB_lQKiukATA.JLAnmA_pNQQFuiukX9kZ9h2194qYhJ-eWQTbLDiFSVo"
-);
 
 exports.postDetails = (req, res, next) => {
   console.log(req.body);

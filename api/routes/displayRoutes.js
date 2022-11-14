@@ -3,7 +3,7 @@ const Block = require("../models/block");
 const fs = require("fs");
 const path = require("path");
 const router = express.Router();
-const { spawn } = require("child_process");
+const { PythonShell } = require("python-shell");
 
 const p = path.join(
   path.dirname(process.mainModule.filename),
@@ -27,11 +27,15 @@ router.get("/all", (req, res, next) => {
 router.post("/display", async (req, res, next) => {
   const uniqueCode = req.body.code;
   console.log(uniqueCode);
-  Block.findById(uniqueCode, function (err, record) {
+
+  await Block.findById(uniqueCode, async function (err, record) {
     if (!err) {
       console.log("Found: ", JSON.stringify(record));
       fs.writeFileSync(p, JSON.stringify(record));
-      spawn("python", ["./makedf.py"]);
+      await PythonShell.run("makedf.py", null, function (err) {
+        if (err) console.log("Error executing pythobn", err);
+        console.log("finished executing the python script");
+      });
       res.render("displaydata", { download: true, msg: "link here" });
     } else {
       console.log("No record found");
@@ -43,4 +47,14 @@ router.post("/display", async (req, res, next) => {
   });
 });
 
+router.get("/download", (req, res, next) => {
+  console.log("Reached download button");
+  res.download(
+    path.join(
+      path.dirname(process.mainModule.filename),
+      "local-storage",
+      "filtered_data.csv"
+    )
+  );
+});
 module.exports = router;
