@@ -2,13 +2,18 @@ const ethAirBalloons = require("ethairballoons");
 const Block = require("../models/block");
 const nodemailer = require("nodemailer");
 const path = require("path");
+const sgMail = require("@sendgrid/mail");
+
+sgMail.setApiKey(
+  "SG.wm4Y9ThiSJuB_lQKiukATA.JLAnmA_pNQQFuiukX9kZ9h2194qYhJ-eWQTbLDiFSVo"
+);
 
 exports.postDetails = (req, res, next) => {
   console.log(req.body);
   res.render("filters");
 };
 
-exports.postFilters = (req, res, next) => {
+exports.postFilters = async (req, res, next) => {
   //updates block with given patientID
 
   const updatedBlock = {
@@ -44,19 +49,22 @@ exports.postFilters = (req, res, next) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "bountyhunter0005@gmail.com",
-      pass: "BugsBunny0005",
+      user: "as8969@srmist.edu.in",
+      pass: "Arash#123",
+    },
+    tls: {
+      rejectUnauthorized: false,
     },
   });
 
   var mailOptions = {
-    from: "bountyhunter0005@gmail.com",
+    from: "as8969@srmist.edu.in",
     to: `${req.body.kinEmail}, ${req.body.medicalEmail}, ${req.body.otherEmail}`,
     subject: `Access key for patient: ${req.user.displayName}`,
     text: `Your Unique access code is: ${req.user.uniqueCode}`,
   };
 
-  transporter.sendMail(mailOptions, function (error, info) {
+  await transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log("Couldn't send email: ", error);
     } else {
