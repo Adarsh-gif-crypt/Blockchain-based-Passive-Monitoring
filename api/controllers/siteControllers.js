@@ -41,7 +41,7 @@ exports.postFilters = async (req, res, next) => {
     function (err, updatedObject) {
       if (!err) {
         console.log("object updated successfully");
-        res.send(updatedObject);
+        res.render("success");
       } else res.send(err);
     }
   );
