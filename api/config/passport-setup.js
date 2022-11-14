@@ -4,7 +4,6 @@ const passport = require("passport");
 const oauth = require("passport-google-oauth20");
 const GoogleStrategy = require("passport-google-oauth20");
 const User = require("../models/user");
-const nodemailer = require("nodemailer");
 const ethAirBalloons = require("ethairballoons");
 const path = require("path");
 const Block = require("../models/block");
