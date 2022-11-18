@@ -44,8 +44,8 @@ exports.postFilters = (req, res, next) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "bountyhunter0005@gmail.com",
-      pass: "BugsBunny0005",
+      user: process.env.MAIL,
+      pass: process.env.MAILPASS,
     },
   });
 
